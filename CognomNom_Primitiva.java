@@ -90,28 +90,30 @@ public class CognomNom_Primitiva {
     }
 
     /**
-     * //TODO: Completar
-     * @param aposta //TODO: Completar
-     * @param combinacioGuanyadora //TODO: Completar
-     * @return //TODO: Completar
-     * @since 1.0
+     * Método que calcula el premio obtenido por el jugador comparando su apuesta con la combinación ganadora.
+     * @param apuesta un array de enteros representando la apuesta del jugador.
+     * @param combinacionGanadora un array de enteros representando la combinación ganadora.
+     * @return el premio obtenido por el jugador.
+     * @since 1.1
      */
-    private static int comprovarEncerts(int[] aposta, int[] combinacioGuanyadora){
-        int premi = 0;
-        int encerts = 0;
-        boolean reintregrament = false;
+    public int comprobarAciertos(int[] apuesta, int[] combinacionGanadora) {
+        int premio = 0;
+        int aciertos = 0;
 
-        //Comprobar encerts a la combinació
-        //TODO: Fer el codi del mètode
+        for (int i = 0; i < 6; i++) {
+            if (apuesta[i] == combinacionGanadora[i]) {
+                aciertos++;
+                premio += 20;
+            }
+        }
 
-        //Comprobar reintegrament
-        //TODO: Fer el codi del mètode
+        if (apuesta[6] == combinacionGanadora[6]) {
+            premio += 6;
+        }
 
-        //Calcular premi
-        //TODO: Fer el codi del mètode
-
-        return premi;
+        return premio;
     }
+
 
     /**
      * Aquest mètode llegeix un enter per teclat dins d'un domini determinat
