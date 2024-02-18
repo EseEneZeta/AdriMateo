@@ -3,9 +3,9 @@ import java.util.Scanner;
 
 /**
  * Programa de simulació de La Primitiva
- * @auhor //TODO: Nom Alumne
+ * @auhor //TODO: MATEO,ADRI
  * @version 1.0
- * @date //TODO: data
+ * @date //TODO: 16/02/24
  */
 //TODO: Fer refractor per canviar el nom de la classe
 public class CognomNom_Primitiva {
@@ -61,17 +61,37 @@ public class CognomNom_Primitiva {
     }
 
     /**
-     * //TODO: Completasr
-     * @return //TODO: Completar
+     * Método para introducir la apuesta del usuario.
+     * @return un array en el que se encuentre la apuesta del usuario.
      * @since 1.0
      */
-    private static int[] introduirAposta(){
-        System.out.println("Introdueix la teva aposta: ");
-        int[] aposta = null;
 
-        //TODO: Fer el codi del mètode
+    private static int[] introduirAposta() {
+        Scanner scanner = new Scanner(System.in);
+        int[] apuesta = new int[7];
+        boolean entradaValida = false;
 
-        return aposta;
+        while (!entradaValida) {
+            System.out.println("Introduce la apuesta (6 números del 1 al 49):");
+            for (int i = 0; i < 6; i++) {
+                apuesta[i] = scanner.nextInt();
+                if (apuesta[i] < 1 || apuesta[i] > 49) {
+                    System.out.println("Los números deben estar entre 1 y 49. Inténtalo de nuevo.");
+                    scanner.nextLine();
+                    break;
+                }
+            }
+            System.out.println("Introduce el reintegro (0 al 9):");
+            apuesta[6] = scanner.nextInt();
+            if (apuesta[6] < 0 || apuesta[6] > 9) {
+                System.out.println("El reintegro debe estar entre 0 y 9. Inténtalo de nuevo.");
+                scanner.nextLine();
+            } else {
+                entradaValida = true;
+            }
+        }
+
+        return apuesta;
     }
 
     /**
@@ -104,28 +124,30 @@ public class CognomNom_Primitiva {
     }
 
     /**
-     * //TODO: Completar
-     * @param aposta //TODO: Completar
-     * @param combinacioGuanyadora //TODO: Completar
-     * @return //TODO: Completar
-     * @since 1.0
+     * Método que calcula el premio obtenido por el jugador comparando su apuesta con la combinación ganadora.
+     * @param apuesta un array de enteros representando la apuesta del jugador.
+     * @param combinacionGanadora un array de enteros representando la combinación ganadora.
+     * @return el premio obtenido por el jugador.
+     * @since 1.1
      */
-    private static int comprovarEncerts(int[] aposta, int[] combinacioGuanyadora){
-        int premi = 0;
-        int encerts = 0;
-        boolean reintregrament = false;
+    public int comprobarAciertos(int[] apuesta, int[] combinacionGanadora) {
+        int premio = 0;
+        int aciertos = 0;
 
-        //Comprobar encerts a la combinació
-        //TODO: Fer el codi del mètode
+        for (int i = 0; i < 6; i++) {
+            if (apuesta[i] == combinacionGanadora[i]) {
+                aciertos++;
+                premio += 20;
+            }
+        }
 
-        //Comprobar reintegrament
-        //TODO: Fer el codi del mètode
+        if (apuesta[6] == combinacionGanadora[6]) {
+            premio += 6;
+        }
 
-        //Calcular premi
-        //TODO: Fer el codi del mètode
-
-        return premi;
+        return premio;
     }
+
 
     /**
      * Aquest mètode llegeix un enter per teclat dins d'un domini determinat
