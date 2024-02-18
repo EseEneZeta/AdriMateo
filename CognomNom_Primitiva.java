@@ -2,15 +2,15 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
- * Programa de simulació de La Primitiva
- * @auhor //TODO: MATEO,ADRI
+ * Programa de simulación de La Primitiva
+ * @author MATEO,ADRI
  * @version 1.0
- * @date //TODO: 16/02/24
+ * @date 16/02/24
  */
-//TODO: Fer refractor per canviar el nom de la classe
+//TODO: Refactorizar para cambiar el nombre de la clase
 public class CognomNom_Primitiva {
     /**
-     * Mètode main executable
+     * Método main ejecutable
      * @param args
      * @since 1.0
      */
@@ -19,7 +19,7 @@ public class CognomNom_Primitiva {
     }
 
     /**
-     * //Métode per mostrar el menú principal
+     * Método para mostrar el menú principal
      * @since 1.3
      */
     private static void menuPrincipal(){
@@ -33,22 +33,21 @@ public class CognomNom_Primitiva {
             System.out.println("3. Juego nuevo");
             System.out.println("4. Salir");
 
-            int opcio = scanner.nextInt();
+            int opcion = scanner.nextInt();
 
-            switch (opcio) {
+            switch (opcion) {
                 case 1:
-                    int[] aposta = introduirAposta();
-                    int[] combinacioGuanyadora = calcularCombinacioGuanyadora();
-                    int premi = comprovarEncerts(aposta, combinacioGuanyadora);
-                    System.out.println("El teu premi és: " + premi + " €");
+                    int[] apuesta = introducirAposta();
+                    int[] combinacionGanadora = calcularCombinacionGanadora();
+                    int premio = comprobarAciertos(apuesta, combinacionGanadora);
+                    System.out.println("El teu premi és: " + premio + " €");
                     break;
                 case 2:
-                    calcularCombinacioGuanyadora();
-                    int[] combinacioGuanyadora1 = calcularCombinacioGuanyadora();
-                    System.out.println("La combinació guanyadora és: " + combinacioGuanyadora1);
+                    int[] combinacionGanadora1 = calcularCombinacionGanadora();
+                    System.out.println("La combinació guanyadora és: " + java.util.Arrays.toString(combinacionGanadora1));
                     break;
                 case 3:
-                    //En construcció
+                    // En construcción
                     break;
                 case 4:
                     System.out.println("Sortint...");
@@ -66,7 +65,7 @@ public class CognomNom_Primitiva {
      * @since 1.0
      */
 
-    private static int[] introduirAposta() {
+    private static int[] introducirAposta() {
         Scanner scanner = new Scanner(System.in);
         int[] apuesta = new int[7];
         boolean entradaValida = false;
@@ -95,32 +94,32 @@ public class CognomNom_Primitiva {
     }
 
     /**
-     * Metodo para generar la combinación ganadora
-     * @return un array con 7 numeros random, los 6 primeros (únicos) del 1 al 49 y el último del 0 al 9
+     * Método para generar la combinación ganadora
+     * @return un array con 7 números random, los 6 primeros (únicos) del 1 al 49 y el último del 0 al 9
      * @since 1.2
      */
-    private static int[] calcularCombinacioGuanyadora(){
+    private static int[] calcularCombinacionGanadora(){
 
-        int[] combinacio = new int[7];
+        int[] combinacion = new int[7];
         Random random = new Random();
 
         for (int i = 0; i < 6; i++) {
             int min = 1;
             int max = 49;
-            combinacio[i] = random.nextInt(max - min + 1) + min;
+            combinacion[i] = random.nextInt(max - min + 1) + min;
 
 
             for (int j = 0; j < i; j++) {
-                if (combinacio[i] == combinacio[j]) {
+                if (combinacion[i] == combinacion[j]) {
                     i--;
                     break;
                 }
             }
         }
 
-        combinacio[6] = random.nextInt(10);
+        combinacion[6] = random.nextInt(10);
 
-        return combinacio;
+        return combinacion;
     }
 
     /**
@@ -130,7 +129,7 @@ public class CognomNom_Primitiva {
      * @return el premio obtenido por el jugador.
      * @since 1.1
      */
-    public int comprobarAciertos(int[] apuesta, int[] combinacionGanadora) {
+    public static int comprobarAciertos(int[] apuesta, int[] combinacionGanadora) {
         int premio = 0;
         int aciertos = 0;
 
@@ -150,57 +149,57 @@ public class CognomNom_Primitiva {
 
 
     /**
-     * Aquest mètode llegeix un enter per teclat dins d'un domini determinat
-     * @param missatge parametritzat per a mostrar a l'usuari@
-     * @param min valor min acceptat
-     * @param max valor max acceptat
+     * Este método lee un entero por teclado dentro de un dominio determinado
+     * @param mensaje parametrizado para mostrar al usuario
+     * @param min valor mínimo aceptado
+     * @param max valor máximo aceptado
      * @return retorna un int
      * @since 1.0
      */
-    private static int llegirInt(String missatge, int min, int max) {
-        Scanner llegir = new Scanner(System.in);
+    private static int leerInt(String mensaje, int min, int max) {
+        Scanner leer = new Scanner(System.in);
         int x = 0;
-        boolean valorCorrecte = false;
+        boolean valorCorrecto = false;
         do{
-            System.out.println(missatge);
-            valorCorrecte = llegir.hasNextInt();
-            if (!valorCorrecte){
-                System.out.println("ERROR: Valor no enter.");
-                llegir.nextLine();
-            }else{ // Tinc un enter
-                x = llegir.nextInt();
-                llegir.nextLine();
+            System.out.println(mensaje);
+            valorCorrecto = leer.hasNextInt();
+            if (!valorCorrecto){
+                System.out.println("ERROR: Valor no entero.");
+                leer.nextLine();
+            }else{ // Tengo un entero
+                x = leer.nextInt();
+                leer.nextLine();
                 if (x < min || x > max){
-                    System.out.println("Opció no vàlida");
-                    valorCorrecte = false;
+                    System.out.println("Opción no válida");
+                    valorCorrecto = false;
                 }
             }
-        }while(!valorCorrecte);
+        }while(!valorCorrecto);
 
         return x;
     }
 
     /**
-     * Aquest mètode serveix per capturar floats des de teclat amb control d'errors
-     * @param missatge
+     * Este método sirve para capturar floats desde teclado con control de errores
+     * @param mensaje
      * @return
      * @since 1.0
      */
-    private static float llegirFloat(String missatge){
-        Scanner llegir = new Scanner(System.in);
+    private static float leerFloat(String mensaje){
+        Scanner leer = new Scanner(System.in);
         float x = 0;
-        boolean valorCorrecte = false;
+        boolean valorCorrecto = false;
         do{
-            System.out.print(missatge);
-            valorCorrecte = llegir.hasNextFloat();
+            System.out.print(mensaje);
+            valorCorrecto = leer.hasNextFloat();
 
-            if (!valorCorrecte){
+            if (!valorCorrecto){
                 System.out.println("ERROR: Valor no float.");
             }else{
-                x = llegir.nextFloat();
+                x = leer.nextFloat();
             }
-            llegir.nextLine();
-        }while(!valorCorrecte);
+            leer.nextLine();
+        }while(!valorCorrecto);
 
         return x;
     }
